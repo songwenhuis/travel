@@ -1,0 +1,16 @@
+server:
+  port: 8083
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
+spring:
+  application:
+    name: travel-server
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.101.6:3306/travel?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 1996920
+mybatis:
+  mapper-locations: /mapper/*.xml
