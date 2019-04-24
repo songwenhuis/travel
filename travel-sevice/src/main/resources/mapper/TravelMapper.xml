@@ -8,6 +8,9 @@
         SELECT id travelId,travelTitle,travelTitleInfo,travelImg,travelPrice,travelType,travelSatisfaction,travelPraise,startCity,endCity FROM TRAVEL
         where id=#{value}
     </select>
+    <select id="login" parameterType="String" resultType="com.jk.pojo.User">
+        select uid,username,password from user where username=#{value}
+    </select>
 
 </mapper>
     

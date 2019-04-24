@@ -1,7 +1,9 @@
 package com.jk.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.jk.pojo.Order;
 import com.jk.pojo.TravelInfo;
+import com.jk.pojo.User;
 import com.jk.service.TravelService;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -15,6 +17,10 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +43,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -67,6 +74,111 @@ public class TravelController {
     private ElasticsearchTemplate elasticsearchTemplate;
     @Resource
     private RedisTemplate<String ,Object> redisTemplate;
+    @Resource
+    private MongoTemplate mongoTemplate;
+
+    @GetMapping("login")
+    @ResponseBody
+    public Boolean login(User user){
+        User userinfo = travelService.login(user);
+        if (userinfo!=null){
+            redisTemplate.opsForValue().set("user",userinfo);
+            redisTemplate.expire("user", 300, TimeUnit.SECONDS);
+
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+    @GetMapping("logOut")
+    @ResponseBody
+    public Boolean logOut(){
+        User user = (User) redisTemplate.opsForValue().get("user");
+        if (user!=null){
+            redisTemplate.delete("user");
+            return true;
+        }
+        return false;
+
+    }
+    @GetMapping("getSession")
+    @ResponseBody
+    public Boolean getSession(){
+        User user = (User) redisTemplate.opsForValue().get("user");
+
+        if (user!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    @GetMapping("findSession")
+    @ResponseBody
+    public User findSession(){
+        User user = (User) redisTemplate.opsForValue().get("user");
+
+        if (user!=null){
+            return user;
+        }else{
+            return null;
+        }
+    }
+    @GetMapping("queryOrder")
+    @ResponseBody
+    public List<Order>  queryOrder(){
+        User user = (User) redisTemplate.opsForValue().get("user");
+        Query query=new Query();
+        Criteria criteria=new Criteria();
+        criteria.andOperator(Criteria.where("userId").is(user.getUid()));
+        query.addCriteria(criteria);
+        List<Order> order = mongoTemplate.find(query, Order.class, "order");
+        return order;
+    }
+
+
+    @PostMapping("addTravelDetail")
+    @ResponseBody
+    public void addTravelDetail(Order order){
+        User user = (User) redisTemplate.opsForValue().get("user");
+        System.out.println("order = [" + order + "]");
+        //前台传过来的商品ID
+        Integer productId = order.getProductId();
+        Query query=new Query();
+        Criteria criteria=new Criteria();
+        criteria.andOperator(Criteria.where("productId").is(productId));
+        query.addCriteria(criteria);
+        List<Order> findorder = mongoTemplate.find(query, Order.class, "order");
+        if (findorder.size()==0){
+            order.setUserId(user.getUid());
+            order.setUsernameInfo(user.getUsername());
+            order.setTotalPrice(order.getNum()*order.getTravelPrice());
+            mongoTemplate.save(order,"order");
+        }else{
+            for (Order order1 : findorder) {
+                if (productId==order1.getProductId()){
+                    Integer num=order1.getNum()+order.getNum();
+                    Double aa=order.getTravelPrice()*order.getNum();
+                    Double price=aa+order1.getTotalPrice();
+                    Update update = Update.update("num", num).set("totalPrice",price);
+                    mongoTemplate.updateFirst(query, update, Order.class,"order");
+                }else{
+                    order.setUserId(user.getUid());
+                    order.setUsernameInfo(user.getUsername());
+                    order.setTotalPrice(order.getNum()*order.getTravelPrice());
+                    mongoTemplate.save(order,"order");
+                }
+            }
+
+
+
+        }
+
+
+    }
+
 
     @GetMapping("getTravelDetail")
     @ResponseBody
@@ -75,7 +187,7 @@ public class TravelController {
         List<TravelInfo> list = new ArrayList<TravelInfo>();
 
         list=travelService.getTravelDetail(ids);
-        System.out.println(list);
+
 
         return list;
     }
@@ -103,7 +215,8 @@ public class TravelController {
     @ResponseBody
     public List<TravelInfo> querySearch(TravelInfo travelInfo){
         Client client = elasticsearchTemplate.getClient();
-        SearchRequestBuilder searchRequestBuilder = client.prepareSearch("travel").setTypes("elTravel");
+        SearchRequestBuilder searchRequestBuilder = client.prepareSearch("travel").setTypes("elTravel")
+                ;
 
 
 
@@ -178,8 +291,8 @@ public class TravelController {
             response = httpClient.execute(httpGet);
 
             json = EntityUtils.toString(response.getEntity(), "UTF-8");
-            System.out.println("!!!!!!!!!"+json);
 
+            System.out.println(json);
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         } finally {
