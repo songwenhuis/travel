@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>机票预订--旅游网站</title>
+	<link rel="stylesheet" href="css/column.css">
+	<link rel="stylesheet" href="css/basic.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+<header>
+	<nav id="nav">
+	<div id="logo"><img src="img/logo.png" alt=""></div> 
+	<ul>
+		<li><a href="index.html">首页</a></li>
+		<li><a href="informations.html">旅游资讯</a></li>
+		<li class="active"><a href="ticket.html">机票订购</a></li>
+		<li><a href="scenery.html">风景欣赏</a></li>
+        <li><a href="about.html">公司简介</a></li>
+	</ul>
+	</nav>
+</header>
+<div id="headline">
+    <div class="headline">
+    <hgroup>
+        <h2>旅游资讯</h2>
+        <p>介绍各种最新旅游信息、资讯要闻、景点攻略等</p>
+        </hgroup>
+    </div>
+</div>
+<div id="container">
+<article class="list ticket">
+<form>
+    <h2>航班查询</h2>
+    <div class="type"><span>航班类型<strong>单程</strong>往返</span></div>
+    <div class="form left">
+    <p>
+    <lable for="from_city">出发城市</lable>
+    <input type="text" name="from_city"  placeholder="城市名" id="startCity">
+    </p>
+    <p>
+    <lable>返回城市</lable>
+    <input type="text" placeholder="城市名" id="endCity">
+    </p>
+    </div>
+    <div class="form center">
+    <p>
+    <lable>出发时间</lable>
+    <input type="date" placeholder="时间/日期" id="startDate">
+    </p>
+    <p>
+    <lable>返回时间</lable>
+    <input type="date" placeholder="时间/日期" id="endDate">
+    </p>
+    </div>
+    <div class="form right">
+    <button type="button" class="submit" onclick="queryFlight()">查询</button>
+    </div>
+</form>
+
+
+<div class="list_news">
+
+<table>
+<thead>
+<tr>
+    <th>航空公司</th>
+    <th>航班编号</th>
+    <th>机型</th>
+    <th>起飞时间</th>
+    <th>历经时间</th>
+    <th>到达时间</th>
+    <th>价格</th>
+    
+    <th>始发-到达</th>
+    
+    <th>预定</th>
+</tr>
+</thead>
+<tbody class="info">
+
+<script type="text/javascript">
+    function queryFlight(){
+        var startCity= $("#startCity").val();
+        var endCity= $("#endCity").val();
+        var startDate= $("#startDate").val();
+        var endDate= $("#endDate").val();
+        $.ajax({
+            url:'http://192.168.101.6:8082/travel/queryFlight',
+            type: 'GET',
+            data:{startCity:startCity,
+                   endCity:endCity,
+                   startDate:startDate,
+                   endDate:endDate
+                 },
+            dataType:'json',
+            success:function(data){
+                
+                var html="";
+                    for (var i = 0; i < data.FLIGHTS.length; i++) {
+                       
+                        html+='<tr>'+
+                        '<td>'+data.FLIGHTS[i].FLIGHT_AIRWAYS_CH+'</td>'+
+                        '<td>'+data.FLIGHTS[i].FLIGHT_ID+'</td>'+
+                        '<td>'+data.FLIGHTS[i].FLIGHT_PLANE_CN+'</td>'+
+                        '<td>'+data.FLIGHTS[i].START_TIME+'</td>'+
+                        '<td>'+data.FLIGHTS[i].FLIGHT_AIR_TIME+'</td>'+
+                        '<td>'+data.FLIGHTS[i].END_TIME+'</td>'+
+                        '<td class="price">¥'+data.FLIGHTS[i].FLIGHT_LOWEST_PRICE+'</td>'+
+                        
+                        '<td>'+data.FLIGHTS[i].START_AIRPORT_CH+'-'+data.FLIGHTS[i].END_AIRPORT_CH+'</td>'+
+                        
+                        '<td><a href="###" class="reserve">预定</a>'+
+                        '</td>'+
+                        '</tr>';
+                    }
+                    $(".info").html(html);
+
+            }
+        })
+    }
+</script>
+
+</tbody>
+<tfoot>
+<tr>
+    <td colspan="7"><a href="###" class="ticket_more">我也是有底线的...</a>
+    </td>
+</tr>
+</tfoot>
+</table>
+</div>
+</article>
+<aside class="sidebar">
+    <div class="recommend sidebox">
+    <h3>景点推荐</h3>
+    <div class="tag">
+    <ul>
+		<li><a href="###">曼谷(12)</a></li>
+		<li><a href="###">东京(5)</a></li>
+		<li><a href="###">西双版纳(8)</a></li>
+		<li><a href="###">漓江(16)</a></li>
+		<li><a href="###">呼伦贝尔(4)</a></li>
+		<li><a href="###">首尔(9)</a></li>
+		<li><a href="###">巴厘岛(15)</a></li>
+		<li><a href="###">土耳其(22)</a></li>
+		<li><a href="###">夏威夷(5)</a></li>
+		<li><a href="###">巴厘岛(11)</a></li>
+		<li><a href="###">毛里求斯(7)</a></li>
+		<li><a href="###">吉普岛(4)</a></li>
+		<li><a href="###">希腊(18)</a></li>
+		<li><a href="###">法瑞意(8)</a></li>
+		<li><a href="###">马尔代夫(9)</a></li>
+		<li><a href="###">新西兰(16)</a></li>
+		<li><a href="###">埃及(11)</a></li>
+		<li><a href="###">迪拜(14)</a></li>
+		<li><a href="###">斯里兰卡(7)</a></li>
+		<li><a href="###">麦哈顿(3)</a></li>
+		<li><a href="###">大阪(15)</a></li>
+	</ul>
+</div>
+    </div>
+    <div class="hot sidebox">
+    <h3>热门旅游</h3>
+    <div class="figure">
+    <figure>
+    <img src="img/hot1.jpg" alt="曼谷-芭提雅6日游">
+    <figcaption>曼谷-芭提雅6日游</figcaption>
+</figure>
+<figure>
+    <img src="img/hot2.jpg" alt="马尔代夫双鱼6日游">
+    <figcaption>马尔代夫双鱼6日游</figcaption>
+</figure>
+<figure>
+    <img src="img/hot3.jpg" alt="海南双飞5日游">
+    <figcaption>海南双飞5日游</figcaption>
+</figure>
+
+    </div>
+    </div>
+    <div class="treasure sidebox">
+    <h3> </h3>
+    <div class="box">
+    <a href="" class="trea1">天气预报</a>
+    <a href="" class="trea2">火车票查询</a>
+    <a href="" class="trea3">航空查询</a>
+    <a href="" class="trea4">地铁线路查询</a>
+    </div>
+    </div>
+</aside>
+</div>
+
+	<footer id="footer">
+	<div class="top">
+	<div class="block left">
+	<h3>合作伙伴</h3>
+	<hr>
+	<ul>
+		<li>途牛旅游网</li>
+		<li>驴妈妈旅游网</li>
+		<li>携程旅游</li>
+		<li>中国去青年旅行社</li>
+	</ul>
+
+	</div>
+	<div class="block middle">
+	<h3>旅游FAQ</h3>
+	<hr>
+	<ul>
+		<li>旅游合同签订方式？</li>
+		<li>儿童价是基于什么制定的？</li>
+		<li>旅游的线路品质怎么界定的？</li>
+		<li>单房差是什么？</li>
+		<li>旅游保险有那些种类？</li>
+	</ul>
+	</div>
+	<div class="block right">
+	<h3>联系方式</h3>
+	<hr>
+	<ul>
+        <li>微博：weibo.com/jinke</li>
+        <li>邮件：jinke@jinke.com</li>
+        <li>地址：北京市海淀区西三旗明园大学</li>
+
+    </ul>
+    </div>
+    
+    </div>
+    <div class="bottom">Copyright © XUEHUA 金科旅行社| 京ICP 备120110119 号| 旅行社经营许可证：L-YC-BK12345</div>
+	</footer>
+</body>
+</html>

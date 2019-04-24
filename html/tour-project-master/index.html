@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>首页--旅游网站</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/basic.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+<header>
+	<nav id="nav">
+	<div id="logo"><img src="img/logo.png" alt=""></div> 
+	<ul>
+		<li class="active"><a href="index.html">首页</a></li>
+		<li><a href="informations.html">旅游资讯</a></li>
+		<li><a href="ticket.html">机票订购</a></li>
+		<li><a href="scenery.html">风景欣赏</a></li>
+		<li><a href="about.html">公司简介</a></li>
+	</ul>
+	</nav>
+</header>
+<div class="search">
+    <div class="center"></div>
+    <input class="input" type="text" placeholder="请输入陆游景点或城市" id="infos">
+    <div class="button"><a href="javascript:search()">搜索</a></div> 
+    </div>
+<div class="tour">
+	<section class="news">
+	
+	<p>国内旅游、国外旅游、自助旅游、自驾旅游、油轮签证、主题旅游等各种最新热门旅游推荐</p>
+	</section>
+	<table class="info"></table>
+	<script type="text/javascript">
+		$(function(){
+	travelInfo();
+		})
+		function travelInfo(){
+			$.ajax({
+				url: 'http://192.168.101.6:8082/travel/getTravelInfo',
+				type: 'GET',
+				dataType:'json',
+				success:function(data){
+					var html="";
+					for (var i = 0; i < data.length; i++) {
+						html+='<figure>'+
+						'<a href="file:///C:/Users/Hasee/Desktop/'+
+						'%E6%97%85%E6%B8%B8/tour-project-master/detail.html?id='+data[i].travelId+'">'+
+						'<img src="'+data[i].travelImg+'" alt=""></a>'+
+						'<figcaption>'+
+						'<strong class="title"> &lt;'+data[i].travelTitle+'&gt;</strong>'+
+						''+data[i].travelTitleInfo+''+
+						'<div class="info">'+
+						'<em class="sat">满意度 '+data[i].travelSatisfaction+'</em>'+
+						'<span class="price">￥ <strong>'+data[i].travelPrice+'</strong> 起</span></div>'+
+						'<div class="type">'+data[i].travelType+'</div></figcaption>'+
+						'</figure>';
+					}
+					$(".info").html(html);
+
+				}
+				
+			})
+			
+			
+		}
+
+		function search(){
+			var info= $("#infos").val();
+			
+			$.ajax({
+				url: 'http://192.168.101.6:8082/travel/querySearch',
+				type: 'GET',
+				data:{travelTitleInfo:info},
+				dataType:'json',
+				success:function(data){
+					var html="";
+					for (var i = 0; i < data.length; i++) {
+						html+='<figure>'+
+						'<a href="#"><img src="'+data[i].travelImg+'" alt=""></a>'+
+						'<figcaption>'+
+						'<strong class="title"> &lt;'+data[i].travelTitle+'&gt;</strong>'+
+						''+data[i].travelTitleInfo+''+
+						'<div class="info">'+
+						'<em class="sat">满意度 '+data[i].travelSatisfaction+'</em>'+
+						'<span class="price">￥ <strong>'+data[i].travelPrice+'</strong> 起</span></div>'+
+						'<div class="type">'+data[i].travelType+'</div></figcaption>'+
+						'</figure>';
+					}
+					$(".info").html(html);
+
+				}
+				
+			})
+		}
+	</script>
+	
+	
+	</div>
+	<footer id="footer">
+	<div class="top">
+	<div class="block left">
+	<h3>合作伙伴</h3>
+	<hr>
+	<ul>
+		<li>途牛旅游网</li>
+		<li>驴妈妈旅游网</li>
+		<li>携程旅游</li>
+		<li>中国去青年旅行社</li>
+	</ul>
+
+	</div>
+	<div class="block middle">
+	<h3>旅游FAQ</h3>
+	<hr>
+	<ul>
+		<li>旅游合同签订方式？</li>
+		<li>儿童价是基于什么制定的？</li>
+		<li>旅游的线路品质怎么界定的？</li>
+		<li>单房差是什么？</li>
+		<li>旅游保险有那些种类？</li>
+	</ul>
+	</div>
+	<div class="block right">
+	<h3>联系方式</h3>
+	<hr>
+	<ul>
+		<li>微博：weibo.com/jinke</li>
+		<li>邮件：jinke@jinke.com</li>
+		<li>地址：北京市海淀区西三旗明园大学</li>
+
+	</ul>
+	</div>
+	
+	</div>
+	<div class="bottom">Copyright © XUEHUA 金科旅行社| 京ICP 备120110119 号| 旅行社经营许可证：L-YC-BK12345</div>
+	</footer>
+</body>
+
+</html>

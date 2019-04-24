@@ -1,0 +1,13 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.mapper.TravelMapper">
+    <select id="getTravelInfo" resultType="com.jk.pojo.TravelInfo">
+  SELECT id travelId,travelTitle,travelTitleInfo,travelImg,travelPrice,travelType,travelSatisfaction FROM TRAVEL
+    </select>
+    <select id="getTravelDetail" parameterType="Integer" resultType="com.jk.pojo.TravelInfo">
+        SELECT id travelId,travelTitle,travelTitleInfo,travelImg,travelPrice,travelType,travelSatisfaction,travelPraise,startCity,endCity FROM TRAVEL
+        where id=#{value}
+    </select>
+
+</mapper>
+    

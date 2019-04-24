@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0031)http://www.bytst.com/yuding.php -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>在线预订_凡品&nbsp;捷德奥法意瑞6国14日乌克兰国际航空 全程当地三星级酒店 迪斯尼乐园的睡美人城堡和灰姑娘城堡 精心设计时尚与浪漫之都</title>
+
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="baidu-site-verification" content="1hgw2Z8gpG"><!--<base href="http://www.bytst.com/">--><base href=".">
+<link rel="shortcut icon" href="http://www.bytst.com/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="css/v4.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+<script charset="utf-8" src="js/lxb.js"></script><script charset="utf-8" src="js/hm.js"></script><script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="js/default.js"></script>
+<link rel="stylesheet" href="css/float.css" type="text/css" charset="utf-8"></head>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+	
+    
+<body>
+<div class="header fl">
+<div class="tops fl">
+<div class="top">
+<div class="top_l fl">
+<span class="fa fa-home"></span>欢迎访问北京青年旅行社股份有限公司！
+</div>
+        <ul class="top_r fr">
+
+<li><a class="favorites" rel="external nofollow" href="javascript:;">加入收藏</a></li>
+<li class="mobile"><a href="javascript:;" rel="external nofollow" title="北青旅手机版官网">手机版</a></li>
+        	<li class=""><a href="http://www.bytst.com/sitemap.html" target="_blank">网站地图</a></li>
+        </ul>
+    </div>
+    </div>
+    <div class="logos fl">
+    	<div class="logo">
+    	<div class="logo_ico fl"><a href="http://www.bytst.com/" target="_blank" title="北青旅"><img alt="北青旅" src="img/logo.jpg" title="北青旅"></a></div>
+    	<div class="search fl">
+    		<form class="search_main" onsubmit="return search_destination()" method="get" name="myform">
+    			<div class="search_type">
+    				<div>全部<span>　</span></div>
+    			</div>
+    				<input id="destination" type="text" onfocus="$(this).val(&#39;&#39;)" onblur="isnull(this.value)" value="泰国/希腊/云南">
+    			<input id="submit" type="submit" value="搜 索">
+    		</form>
+    		<!-- <div class="search_keyword">
+    			<a href="search/?mdd=欧洲">欧洲</a>
+    			<a href="search/?mdd=日本">日本</a>
+    			<a href="search/?mdd=泰国">泰国</a>
+    			<a href="search/?mdd=塞班岛">塞班岛</a>
+    			<a href="search/?mdd=云南">云南</a>
+    			<a href="search/?mdd=西藏">西藏</a>
+    			<a href="search/?mdd=东北">东北</a>
+    			<a href="search/?mdd=大连">大连</a>
+</div> -->
+    	</div>
+    	<div class="phone fr"><img alt="北青旅官网电话：0000-123-456 4000-111-222 010-66666222 010-44444333" src="img/phone.jpg" title="北青旅官网电话：0000-123-456 4000-111-222 010-66666222 010-44444333"></div>
+    	</div>
+    </div>
+
+        
+    <div class="navigation">
+    	
+
+    </div>
+    </div>
+</div>
+<div class="contents fl">
+<div class="content">
+
+<div class="yuding_content">
+<div class="step">
+</div>
+<form name="myform" action="http://www.bytst.com/" method="post" enctype="multipart/form-data" onsubmit="return tijiaoyuding();return false;">
+<div class="line_info">
+<h2><span>确认预订信息</span></h2>
+<ul>
+<li>
+<div class="tabname">线路标题：</div>
+<div id="tit">
+
+</div>
+</li>
+<li>
+<div class="tabname">订单编号：</div>
+<div>
+22343</div>
+</li>
+<li>
+<div class="tabname">参团人数：</div>
+<div>
+<span id="adult"></span>
+</div>
+</li>
+<li>
+<div class="tabname">出发日期：</div>
+<div id="tabname"></div>
+</li>
+<li>
+<div class="tabname">价格：</div>
+<div>
+    <input class="input_date tuanqi" type="text" name="info[tuanqi]" readonly="readonly" id="pric" value="">
+</div>
+</li>
+<li>
+<div class="tabname">总价：</div>
+<div>
+   <span id="pricea"></span>
+</div>
+</li>
+
+
+
+<script> 
+	$(function(){
+		//console.log(location.search.concat());
+		manyValues();
+        var ids=$("#price").val();
+        titleinit(ids);
+         sum();
+
+
+	})
+    function sum(){
+        var pric=$("#pric").val();
+        var adult=$("#info").val();
+        
+
+        $("#pricea").html(pric*adult);
+        
+    }
+	function manyValues(){
+		var url=window.location.search;
+		var price = null;
+		var datt = null;
+		var adult = null;
+		var tit = null;
+		var a = 0;
+		var html = '';
+		var html2 = '';
+		var html3 = '';
+		var html4 = '';
+		if(url.indexOf("?")!=-1){
+			var str = url.substr(1);
+			strs = str.split("&"); 
+			var key=new Array(strs.length);
+			var value=new Array(strs.length);
+   
+			for(i=0;i<strs.length;i++){
+				 key[i]=strs[i].split("=")[0]
+				 value[i]=unescape(strs[i].split("=")[1]); 
+				//alert(key[i]+"="+value[i]);
+				a++;
+				if (a == 1)
+				{
+					price = value[i];
+					
+				}else if(a == 2){
+					adult = value[i];
+					html2 += '<input class="input_date tuanqi" id="info" type="text" name="info[tuanqi]" readonly="readonly" value="'+adult+'">';
+					$("#adult").html(html2)
+				}else if(a == 3){
+					adu = value[i];
+					html3 += '<input type="text" value="'+adu+'" readonly="readonly" >';
+					$("#tabname").html(html3)
+				}
+
+		  } 
+		  if (adult != 0)
+		  {
+			    html += '<div><input id="price" type="hidden" value="'+price+'"></div></ul><div class="totals"><div class="tabname">总计金额：</div><div class="prices">'+($("#pric").val()*adult)+'</div><em>起</em></div></div>';
+		  }
+		  $("#pricea").html(html)
+		
+	}			
+}
+
+function titleinit(ids){
+     $.ajax({
+            url: 'http://192.168.101.6:8082/travel/getTravelDetail',
+            type: 'GET',
+            data:{ids:ids},
+            dataType:'json',
+            async:false,
+        success:function(data){
+
+                var html="";
+                var scenic="";
+                    for (var i = 0; i < data.length; i++) {
+                        
+                        html+=''+data[i].travelTitleInfo+'';
+                        scenic=''+data[i].travelPrice+'';
+                    }
+                    $("#tit").html(html);
+                    $("#pric").val(scenic);
+                    
+                    
+                    
+                    
+
+        }
+      })
+    
+     
+}
+</script>
+
+
+<div class="customer" style="padding:0px">
+<h2><span>您的联系方式</span>(为及时联系您确认，请填写真实信息)</h2>
+<ul>
+<li>
+<div class="tabname">联系人：</div>
+<div><input id="uname" type="text" name="info[uname]" value=""><span class="required">*</span></div>
+</li>
+<li>
+<div class="tabname">身份证号：</div>
+<div><input id="uname" type="text" name="info[uname]" value=""><span class="required">*</span></div>
+</li>
+<li>
+<div class="tabname">手机号：</div>
+<div><input id="shouji" type="text" name="info[shouji]" value=""><span class="required">*</span></div>
+</li>
+<li>
+<div class="tabname">固定电话：</div>
+<div><input id="dianhua" type="text" name="info[dianhua]" value="">　</div>
+</li>
+
+<li>
+<div class="tabname">备注：</div>
+<div><textarea id="beizhu" name="info[beizhu]"></textarea></div>
+</li>
+
+<li>
+<div class="tabname">　</div>
+<div><input type="submit" name="dosubmit" value="提　交"></div>
+</li>
+</ul>
+</div>
+</form>
+</div>
+
+</div>
+</div>
+
+<style type="text/css">
+
+input[type=text] {height:24px;width:114px;padding:0 3px;border:1px solid #CCC;}
+.yuding_content {float:left;width:1200px;margin-top:40px;}
+.yuding_content .step {float:left;height:50px;width:1200px;background:url('/templates/hpjr/skins/default/imagesv4/yuding_bg.png') no-repeat;}
+.yuding_content form {float:left;width:1138px;padding-bottom:40px;}
+
+.line_info,.customer {float:left;width:100%;margin-top:20px;padding:30px;border:1px solid #CCC;border-radius:8px;}
+.line_info h2,.customer h2 {float:left;height:32px;width:100%;border-bottom:2px solid #D2D2D2;line-height:32px;}
+.line_info h2 span,.customer h2 span {float:left;height:32px;margin-right:20px;padding-right:20px;border-bottom:2px solid #FF7F00;font-size:18px;text-indent:20px;color:#FF7F00;}
+.line_info h2 span a {color:#666;}
+
+.line_info ul,.customer ul {float:left;width:100%;margin-top:20px;}
+.line_info li,.customer li {float:left;width:100%;line-height:50px;font-family:'宋体';font-size:14px;color:#666;}
+.line_info li div,.customer li div {float:left;padding-left:20px;line-height:50px;font-family:'宋体';font-size:14px;color:#666;}
+.line_info li .tabname,.customer li .tabname {width:100px;padding-left:0;text-align:right;}
+input[type=text].input_date {height:22px;width:90px;background:url('/templates/hpjr/skins/default/imagesv4/default.png') no-repeat 77px -1656px;border:1px solid #CCC;line-height:22px;text-indent:3px;color:#666;}
+
+.customer input[type=submit] {height:36px;width:122px;margin-top:10px;background:#FF7F00;border:0;font-size:16px;text-align:center;color:#FFF;cursor:pointer;}
+.customer textarea {float:left;height:60px;width:450px;margin-top:10px;margin-bottom:10px;padding:5px;border:1px solid #CCC;}
+.price,.prices {float:left;width:100px;margin-right:3px;font-family:"微软雅黑";font-size:24px;text-align:right;color:#FF7F00;}
+.totals {float:left;height:36px;width:100%;background:#eee;line-height:36px;}
+.totals .tabname {float:left;width:100px;font-size:16px;text-align:right;color:#666;}
+.totals .prices {padding-left:20px;text-align:right;}
+.totals em {float:left;height:36px;width:50px;font-family:"宋体";font-size:14px;font-style:normal;color:#666;}
+.required {margin-left:5px;color:red;}
+
+#chengren,#ertong {height:24px;width:60px;border:1px solid #aaa;color:#666;}
+#chengren {margin-right:20px;}
+</style>
+<link rel="stylesheet" type="text/css" href="css/jquery.datepick.css">
+
+<script type="text/javascript" src="js/jquery.datepick.js.下载"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+/*$('.input_date').live('focus',function(){
+$(this).datepick({
+minDate: '+1',
+showOnFocus: true
+});
+});*/
+
+$("#yanzhengma").blur(function(){
+$.post('yzm.php','', function(data){
+var sr=$("#yanzhengma").val();
+if (data!=sr) {
+alert("验证码输入有误！");
+document.getElementById("yanzhengma").value="";
+}
+});
+});
+
+$('.confirm a').click(function(){
+history.go(1);
+});
+
+$('#chengren, #ertong').change(function(){
+$('.prices').text((parseInt($('#chengren').val()) + parseInt($('#ertong').val())) * parseInt($('#price').val()));
+});
+});
+
+function tijiaoyuding()
+{
+var chengren = document.getElementById("chengren");
+var ertong = document.getElementById("ertong");
+var uname = document.getElementById("uname");
+var dianhua = document.getElementById("dianhua");
+var shouji = document.getElementById("shouji");
+var beizhu = document.getElementById("beizhu");
+var yanzhengma = document.getElementById("yanzhengma");
+var ylxdh = /^[0-9-]{6,13}$/;
+var ysj = /^(13|15|16|17|18|19)[0-9]{9}$/;
+var yrs = /^[0-9]*[0-9][0-9]*$/;
+if(!yrs.test(chengren.value))
+{
+alert("请正确现在成人人数！");
+chengren.focus();
+return false;
+}else if(!yrs.test(ertong.value))
+{
+alert("请正确选择儿童人数！");
+ertong.focus();
+return false;
+}else if(chengren.value == '0' && ertong.value == '0')
+{
+alert("请正确选择参团人数！");
+chengren.focus();
+return false;
+}else if(uname.value=="" || uname.value==null)
+{
+alert("请填写联系人姓名！");
+uname.focus();
+return false;
+}else if(shouji.value=="" || shouji.value==null)
+{
+alert("请填写手机号！");
+shouji.focus();
+return false;
+}else if(!ysj.test(shouji.value))
+{
+alert("手机号码格式有误！");
+shouji.focus();
+return false;
+}else if(!ylxdh.test(dianhua.value) && dianhua.value != '')
+{
+alert("联系电话格式有误！");
+dianhua.focus();
+return false;
+}else if(yanzhengma.value=="" || yanzhengma.value==null)
+{
+alert("验证码不能为空！");
+return false;
+}else
+{
+return true;	
+}
+}
+</script>
+
+<div class="footers">
+
+<div class="FAQs">
+<div class="FAQs_cnt">
+<ul class="faq01">
+<li><a href="http://www.bytst.com/about/" target="_blank" title="北青旅关于我们">关于我们</a></li>
+<li><a href="http://www.bytst.com/lxwm/" target="_blank" title="北青旅联系我们">联系我们</a></li>
+<li><a href="http://www.bytst.com/flsm/" target="_blank" title="北青旅法律声明">法律声明</a></li>
+<li><a href="http://www.bytst.com/ysbh/" target="_blank" title="北青旅隐私保护">隐私保护</a></li>
+<li><a href="http://www.bytst.com/mzsm/" target="_blank" title="北青旅免责声明">免责声明</a></li>
+</ul>
+
+<ul class="faq02">
+<li>预订常见问题</li>
+<li><a href="http://www.bytst.com/news/19895.html" target="_blank">纯玩是什么意思</a></li>
+<li><a href="http://www.bytst.com/news/19896.html" target="_blank">单房差是什么</a></li>
+<li><a href="http://www.bytst.com/news/19379.html" target="_blank">双飞、双卧是什么意思</a></li>
+<li><a href="http://www.bytst.com/news/19897.html" target="_blank">一价全含是什么</a></li>
+</ul>
+
+<ul class="faq03">
+<li>签约、付款、发票</li>
+<li><a href="http://www.bytst.com/news/19383.html" target="_blank">可以不签合同吗</a></li>
+<li><a href="http://www.bytst.com/news/19898.html" target="_blank">签约方式</a></li>
+<li><a href="http://www.bytst.com/news/19899.html" target="_blank">付款方式</a></li>
+<li><a href="http://www.bytst.com/news/19900.html" target="_blank">发票制度</a></li>
+</ul>
+
+<ul class="faq04">
+<li>出境、港澳台资料</li>
+<li><a href="http://www.bytst.com/news/17192.html" target="_blank">如何办理护照</a></li>
+<li><a href="http://www.bytst.com/news/17193.html" target="_blank">如何办理签证</a></li>
+<li><a href="http://www.bytst.com/news/17194.html" target="_blank">如何办理港澳通行证</a></li>
+<li><a href="http://www.bytst.com/news/17195.html" target="_blank">如何办理台湾通行证</a></li>
+</ul>
+
+<ul class="faq05">
+<li>出行须知</li>
+<li><a href="http://www.bytst.com/news/19901.html" target="_blank">出团相关问题</a></li>
+<li><a href="http://www.bytst.com/news/19902.html" target="_blank">乘机注意事项</a></li>
+<li><a href="http://www.bytst.com/news/19387.html" target="_blank">酒店、住宿问题</a></li>
+</ul>
+</div>
+</div>
+<div class="both"></div>
+
+<div class="slogans">
+<div class="slogan">
+<div class="slogan_title">北京青年旅行社<br>专注五大服务项</div>
+<ul>
+<li class="sev1">专注服务</li>
+<li class="sev2">产品丰富</li>
+<li class="sev3">品质优先</li>
+<li class="sev4">服务承诺</li>
+<li class="sev5">实时预订</li>
+</ul>
+</div>
+</div>
+
+<div class="footer">
+<ul>
+<li>版权所有　Copyright © 2005-2019　<a href="http://www.bytst.com/" target="_blank" title="北京青年旅行社">北京青年旅行社</a>股份有限公司假日营业部(<a href="http://www.bytst.com/" target="_blank" title="北青旅官网">北青旅</a>)</li>
+<li>电话：400-9611-766　010-51291766　地址：北京市崇文门新世界中心北办公楼1102/1104/1108室</li>
+<li>北京市旅游协会理事单位　中国国家旅游局特许经营中国公民出境旅游指定组团社</li>
+<li>经营许可证　L-BJ-GJ00060　京ICP备10206820号　京公网安备11010102001794号　<b><a target="_blank" href="http://www.bytst.com/">北青旅官网</a></b></li>
+</ul>
+</div>
+<div class="both"></div>
+
+<div class="link">
+<div class="tabname">友情链接：</div>
+<div class="link_cnt">
+</div>
+</div>
+</div>
+
+<center>
+<script>
+var _hmt = _hmt || [];
+(function(){
+var hm = document.createElement("script");
+hm.src = "https://hm.baidu.com/hm.js?d2e29fa10633a15627f3eeaf5b1f93a0";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" charset="utf-8" async="" src="js/lxb.js"></script>
+</center>
+
+
+</body>
+</html>
